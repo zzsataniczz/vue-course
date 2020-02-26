@@ -1,16 +1,16 @@
 <template>
   <div id="app">
-      <Home/>
+      <CurrencyQuotes/>
   </div>
 </template>
 
 <script>
-import Home from './views/Home.vue'
+import CurrencyQuotes from "./components/CurrencyQuotes.vue";
 
 export default {
   name: 'app',
   components: {
-    Home
+      CurrencyQuotes,
   }
 }
 </script>
