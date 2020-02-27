@@ -40,24 +40,18 @@
             return {
                 quotSelect: [],
                 selQuotes: {},
-                quotes: {}
             }
         },
+        computed: {
+            quotes() {
+                return this.$store.getters.getQuotePairs;
+            }
+        },
+        created: async function () {
+            const {quotSelect} = this;
+            await this.$store.dispatch('getQuotePairs', {quotSelect});
+        },
         mounted: function () {
-            axios('/getDataByBaseQuote', {
-                method: 'GET',
-                withCredentials: true,
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                params: {
-                    selectedQuotes: this.quotSelect
-                }
-            }).then((response) => {
-                this.quotes = (response.data);
-            });
-
-
             axios('/getQuotes', {
                 method: 'GET',
                 withCredentials: true,
@@ -72,21 +66,9 @@
         methods: {
             updateQuotes: async function () {
                 if (this.quotSelect.length > 0) {
-
-                    axios('/getDataByBaseQuote', {
-                        method: 'GET',
-                        withCredentials: true,
-                        headers: {
-                            'Content-Type': 'application/json'
-                        },
-                        params: {
-                            selectedQuotes: this.quotSelect
-                        }
-                    }).then((response) => {
-                        this.quotes = (response.data);
-                    })
+                    const {quotSelect} = this;
+                    await this.$store.dispatch('getQuotePairs', {quotSelect})
                 }
-
             },
         }
     }
