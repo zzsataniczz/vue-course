@@ -3,6 +3,7 @@
         <md-table md-card>
             <md-table-toolbar>
                 <h1 class="md-title">Котировки</h1>
+                <router-link :to="{ name : 'about' }">О проекте</router-link>
                 <md-field>
                     <label for="quotSelect">Выберите пары</label>
                     <md-select v-model="quotSelect" name="quotSelect" id="quotSelect" @md-closed="updateQuotes"
@@ -33,9 +34,11 @@
 
 <script>
     import axios from 'axios'
+    import MdRouterLink from "vue-material/src/core/mixins/MdRouterLink/MdRouterLink";
 
     export default {
         name: 'CurrencyQuotes',
+        components: {MdRouterLink},
         data() {
             return {
                 quotSelect: [],
