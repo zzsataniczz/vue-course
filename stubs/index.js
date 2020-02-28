@@ -1,8 +1,19 @@
 const express = require("express");
 const app = express();
 const axios = require('axios').default;
+const path = require('path');
+const history = require('connect-history-api-fallback');
 
 app.use(express.static("dist"));
+
+const staticFileMiddleware = express.static(path.join(__dirname));
+app.use(staticFileMiddleware);
+app.use(history());
+app.use(staticFileMiddleware);
+
+app.get('/', function (req, res) {
+    res.render(path.join(__dirname + '/index.html'))
+});
 
 app.get(["/getDataByBaseQuote"], function (request, response) {
     let quotes = ['BCHEUR,BCHGBP,BCHXRP'];
