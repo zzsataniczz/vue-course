@@ -1,16 +1,16 @@
 <template>
-  <div id="app">
-      <CurrencyQuotes/>
-  </div>
+    <div id="app">
+        <router-view></router-view>
+    </div>
 </template>
 
 <script>
-import CurrencyQuotes from "./components/CurrencyQuotes.vue";
+    import CurrencyQuotes from "./components/CurrencyQuotes.vue";
 
-export default {
-  name: 'app',
-  components: {
-      CurrencyQuotes,
-  }
-}
+    export default {
+        name: 'app',
+        components: {
+            CurrencyQuotes,
+        }
+    }
 </script>
