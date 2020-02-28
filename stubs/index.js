@@ -6,6 +6,8 @@ app.use(express.static("dist"));
 
 app.get(["/getDataByBaseQuote"], function (request, response) {
     let quotes = ['BCHEUR,BCHGBP,BCHXRP'];
+    console.log(request.query);
+    console.log(request.params);
     if (typeof request.query.selectedQuotes !== 'undefined' && request.query.selectedQuotes.length > 0) {
         quotes = request.query.selectedQuotes;
     }

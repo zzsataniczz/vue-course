@@ -1,0 +1,1 @@
+export const GET_QUOTE_PAIRS = 'GET_QUOTE_PAIRS';
