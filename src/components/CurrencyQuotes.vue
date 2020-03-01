@@ -35,6 +35,7 @@
 <script>
     import axios from 'axios'
     import MdRouterLink from "vue-material/src/core/mixins/MdRouterLink/MdRouterLink";
+    import { mapState } from 'vuex';
 
     export default {
         name: 'CurrencyQuotes',
@@ -46,9 +47,9 @@
             }
         },
         computed: {
-            quotes() {
-                return this.$store.getters.getQuotePairs;
-            }
+            ...mapState([
+                'quotes'
+            ])
         },
         created: async function () {
             const {quotSelect} = this;
@@ -76,3 +77,7 @@
         }
     }
 </script>
+
+<style scoped>
+    @import url("./style.css");
+</style>
