@@ -16,6 +16,18 @@
                     </md-select>
                 </md-field>
 
+                <md-field>
+                    <md-input v-model="searchString"
+                              type="text"
+                              name="searchString"
+                              v-on:keyup.enter="validate"
+                              :class="{ 'is-invalid': submitted && errors.has('text') }"></md-input>
+                    <div v-if="submitted && errors.has('searchString')" class="invalid-feedback">{{
+                        errors.first('searchString') }}
+                    </div>
+                    <md-button @click="validate">Найти</md-button>
+                </md-field>
+
             </md-table-toolbar>
 
             <md-table-row>
@@ -42,8 +54,10 @@
         components: {MdRouterLink},
         data() {
             return {
+                submitted: false,
                 quotSelect: [],
                 selQuotes: {},
+                searchString: '',
             }
         },
         computed: {
@@ -73,6 +87,19 @@
                     const {quotSelect} = this;
                     await this.$store.dispatch('getQuotePairs', {quotSelect})
                 }
+            },
+            validate: function() {
+                this.submitted = true;
+                this.$validator.validate().then(valid => {
+                    if (valid) {
+                        this.searchPairs()
+                    }
+                });
+            },
+            searchPairs: async function () {
+                this.quotSelect = [this.searchString]
+                const {quotSelect} = this;
+                await this.$store.dispatch('getQuotePairs', {quotSelect})
             },
         }
     }
